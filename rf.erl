@@ -1,21 +1,19 @@
 -module(rf).
--export([rd/0]).
+-export([rd/2]).
 
-rd() ->
+rd(ServiceID, TaskID) ->
    {ok, Txt} = file:consult("map_eb.txt"),
    List = Txt,
    %io:fwrite("LIST FROM FILE ~p~n",[List]),
 
    SMap = maps:from_list(List),
 
-   F1 = maps:find(51, SMap),
+   F1 = maps:find(ServiceID, SMap),
 
    {ok, F2} = F1,
-   {ServiceName, {Tasks, TaskIDList}} = F2,
+   {ServiceName, {_, TaskIDList}} = F2,
 
    io:fwrite("ServiceName ~s~n", [ServiceName]),
-
-   TaskID = 11,
 
    TaskName = [TEntry || {TID, TEntry} <- TaskIDList, TID =:= TaskID],
    io:fwrite("task name for id ~w is ~s~n", [TaskID, TaskName]),
