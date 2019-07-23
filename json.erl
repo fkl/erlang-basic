@@ -13,7 +13,7 @@ jmap() ->
    List = tuple_to_list(Json),
 
    Func = fun(Elem) ->
-	if Elem == "obj" -> io:format("Nothing");
+	if Elem == obj -> io:format("Nothing");
 		true -> io:format("ELEMENT IS  ~p~n", [Elem])
 	end
    end,
